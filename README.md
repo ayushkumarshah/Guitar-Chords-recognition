@@ -1,6 +1,10 @@
 # Guitar-Chords-recognition
 A ML Project to classify guitar chords using CNN.
 
+## Dataset
+The chords dataset was collected from MONTEFIORE RESEARCH GROUP of University of Liège - Montefiore Institute (Montefiore.ulg.ac.be, 2019). The chords dataset consists of 10 types of chords with 200 audio files of each chord.
+### download link: http://www.montefiore.ulg.ac.be/services/acous/STSI/file/jim2012Chords.zip
+
 ## Libraries required:
 1. numpy
 2. keras
