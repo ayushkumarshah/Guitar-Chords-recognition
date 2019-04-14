@@ -14,6 +14,9 @@ The chords dataset was collected from MONTEFIORE RESEARCH GROUP of University of
 6. tkinter
 7. pygame
 
+## How to run:
+Just install the required libraries and run classify.py
+
 ### chord_recognition.ipynb 
 It creates the trained model model.json for prediction of guitar chords
 
