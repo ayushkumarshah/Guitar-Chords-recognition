@@ -23,4 +23,5 @@ It creates the trained model model.json for prediction of guitar chords
 ### classify.py
 It uses the trained model model.json to predict a recorded guitar chord using a simple UI. In the UI, just press reocrd and play a chord. It records for 3 seconds and saves the output wav file recoeded.wav. The classify button shows the predicted chord.
 
+![alt text](interface.PNG "")
 
