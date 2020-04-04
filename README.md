@@ -10,6 +10,12 @@ $ git clone https://github.com/ayushkumarshah/Guitar-Chords-recognition.git
 $ cd Guitar-Chords-recognition
 ```
 
+If you are using linux system, switch to linux branch:
+
+```console
+$ git checkout linux
+```
+
 ### 2. Installation
 
 ### Option 1: Using Conda - Recommended
