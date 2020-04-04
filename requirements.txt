@@ -4,7 +4,8 @@ audioread==2.1.8
 certifi==2019.11.28
 cycler==0.10.0
 decorator==4.4.2
-gast==0.3.3
+gast==0.2.2
+google-pasta==0.2.0
 grpcio==1.16.1
 h5py==2.10.0
 joblib==0.14.1
@@ -22,6 +23,7 @@ mkl-service==2.3.0
 mock==4.0.1
 numba==0.48.0
 numpy==1.18.1
+opt-einsum==3.2.0
 pandas==1.0.3
 Pillow==7.1.1
 protobuf==3.11.4
@@ -35,9 +37,10 @@ resampy==0.2.2
 scikit-learn==0.22.1
 scipy==1.4.1
 six==1.14.0
-tensorboard==1.13.1
-tensorflow==1.13.1
-tensorflow-estimator==1.13.0
+tensorboard==1.15.0
+tensorflow==1.15.2
+tensorflow-estimator==1.15.1
 termcolor==1.1.0
 tornado==6.0.4
 Werkzeug==1.0.0
+wrapt==1.12.1

@@ -16,8 +16,6 @@ __pycache__/
 # C extensions
 *.so
 
-output/recording/
-
 # Distribution / packaging
 *.egg-info/
 .installed.cfg
@@ -29,3 +27,5 @@ pip-delete-this-directory.txt
 
 # PyBuilder
 target/
+
+.idea/

@@ -40,9 +40,47 @@ $ cd Guitar-Chords-recognition
     $ pip install -r requirements.txt
     ```
 
-## Running the Chords Classifier App (classifier.py)
+## Configuring the Chords Classifier App (classifier.py)
 
 It uses the trained model `models/model.json` to predict a recorded guitar chord.
+
+- First, check the info of the audio recording device of your system by running
+
+    ```console
+    $ python -m src.rec_device_info
+    ```
+
+    You will receive output something like this:
+
+    ```console
+    [('index', 0), ('name', 'MacBook Pro Microphone'), ('maxInputChannels', 1), ('defaultSampleRate', 44100.0)]
+
+    [('index', 1), ('name', 'MacBook Pro Speakers'), ('maxInputChannels', 0), ('defaultSampleRate', 44100.0)]
+    ```
+
+- Note down the `index`, `maxInputChannels` and  `defaultSampleRate` of your recording device or microphone (eg. MacBook
+  Pro Microphone). In my system. it is
+
+    ```console
+    index = 0
+    maxInputChannels = 1
+    defaultSampleRate = 44100.0
+    ```
+
+- Open `src/classify.py` and modify the values accordingly in line numbers 77, 78 and 91
+
+    ```python
+    CHANNELS = 1
+    RATE = 44100
+    ...
+    stream = audio.open(
+                    ...
+                    frames_per_buffer=CHUNK,
+                    input_device_index=0)
+                    )
+    ```
+
+## Running the Chords Classifier App (classifier.py)
 
 - Execute the python file 'classify.py'
 
@@ -71,12 +109,12 @@ See the demo below:
 
 > Click the above video to to go to YouTube and hear the sound as well.
 
-# Training the model (Optional)
+## Training the model (Optional)
 
 If you want to experiment by training the model yourself with your own data or the data used currently, follow the steps
 below:
 
-## 1. Download the Dataset or Use your own dataset
+### 1. Download the Dataset or Use your own dataset
 
 The chords dataset was collected from MONTEFIORE RESEARCH GROUP of University of Liège - Montefiore Institute (Montefiore.ulg.ac.be, 2019). The chords dataset consists of 10 types of chords with 200 audio files of each chord.
 
@@ -87,7 +125,7 @@ $ chmod +x download_data.sh
 $ ./download_data.sh
 ```
 
-## 2. Install tensorflow-gpu for faster training (If you have GPU)
+### 2. Install tensorflow-gpu for faster training (If you have GPU)
 
 **Prerequisites**
 
