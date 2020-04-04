@@ -47,7 +47,7 @@ It uses the trained model `models/model.json` to predict a recorded guitar chord
 - Execute the python file 'classify.py'
 
     ```console
-    $ python classify.py
+    $ python -m src.classify
     ```
 
 - A window is launched as shown below: 
