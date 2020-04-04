@@ -1,0 +1,31 @@
+# Virtual environment
+.venv
+
+# Dataset
+data/
+
+.vscode/
+
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+output/recording/
+
+# Distribution / packaging
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyBuilder
+target/
