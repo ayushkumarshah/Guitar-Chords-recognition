@@ -52,7 +52,7 @@ It uses the trained model `models/model.json` to predict a recorded guitar chord
 
 - A window is launched as shown below: 
 
-    ![Home Interface](images/Interface-home.png)
+    ![Home Interface](output/images/Interface-home.png)
 
 - Click record and play a chord. It records for 3 seconds and saves the output wav file to `recording/recorded.wav`. 
 
@@ -65,7 +65,7 @@ It uses the trained model `models/model.json` to predict a recorded guitar chord
 See the demo below:
     <div align = 'center'>
         <a href = 'https://www.youtube.com/watch?v=DOCVIk9Ocys'>
-            <img src = 'images/app-demo.gif' alt = 'App demo. Click to go to YouTube!' >
+            <img src = 'output/images/app-demo.gif' alt = 'App demo. Click to go to YouTube!' >
         </a>
     </div>
 
