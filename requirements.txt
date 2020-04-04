@@ -10,8 +10,7 @@ cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
 entrypoints==0.3
-gast==0.2.2
-google-pasta==0.2.0
+gast==0.3.3
 grpcio==1.16.1
 h5py==2.10.0
 importlib-metadata==1.6.0
@@ -23,7 +22,6 @@ jedi==0.16.0
 Jinja2==2.11.1
 joblib==0.14.1
 jsonschema==3.2.0
-jupyter==1.0.0
 jupyter-client==6.1.2
 jupyter-console==6.1.0
 jupyter-core==4.6.3
@@ -40,13 +38,11 @@ mistune==0.8.4
 mkl-fft==1.0.15
 mkl-random==1.1.0
 mkl-service==2.3.0
-mock==4.0.1
 nbconvert==5.6.1
-nbformat==5.0.5
+nbformat==5.0.4
 notebook==6.0.3
 numba==0.48.0
 numpy==1.18.1
-opt-einsum==3.2.0
 pandas==1.0.3
 pandocfilters==1.4.2
 parso==0.6.2
@@ -65,7 +61,7 @@ pyrsistent==0.16.0
 python-dateutil==2.8.1
 pytz==2019.3
 PyYAML==5.3.1
-pyzmq==19.0.0
+pyzmq==18.1.1
 qtconsole==4.7.2
 QtPy==1.9.0
 resampy==0.2.2
@@ -73,9 +69,9 @@ scikit-learn==0.22.1
 scipy==1.4.1
 Send2Trash==1.5.0
 six==1.14.0
-tensorboard==1.15.0
-tensorflow==1.15.2
-tensorflow-estimator==1.15.1
+tensorboard==1.14.0
+tensorflow==1.14.0
+tensorflow-estimator==1.14.0
 termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
