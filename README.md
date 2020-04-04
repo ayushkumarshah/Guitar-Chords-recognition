@@ -17,10 +17,24 @@ $ cd Guitar-Chords-recognition
 - Download and install [miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or
   [anaconda](https://docs.anaconda.com/anaconda/install/) if you don't have conda installed in your system.
 
-- Create and activate a new environment 'tf' using the following command:
+- Create a new environment 'tf' using the following command:
 
     ```console
     $ conda env create -f environment.yml
+    ```
+
+    If an error like the one shown below occurs:
+
+    ```console
+    ResolvePackageNotFound:
+        - appnope=0.1.0
+        - libcxx=4.0.1
+    ```
+
+    Just remove those packages from the file `environment.yml` and rerun the above command. Then activate the
+    environment by
+
+    ```
     $ conda activate tf
     ```
 
