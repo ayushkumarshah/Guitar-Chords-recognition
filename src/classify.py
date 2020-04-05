@@ -74,8 +74,8 @@ def restart_program():
 
 def record():
     FORMAT = pyaudio.paInt16
-    CHANNELS = 1
-    RATE = 44100
+    CHANNELS = 2
+    RATE = 48000
     CHUNK = 1024
     RECORD_SECONDS = 3
 
@@ -88,7 +88,7 @@ def record():
                     rate=RATE,
                     input=True,
                     frames_per_buffer=CHUNK,
-                    input_device_index=0)
+                    input_device_index=8)
     print ("recording...")
     frames = []
 
