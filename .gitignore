@@ -1,9 +1,6 @@
 # Virtual environment
 .venv
 
-# Dataset
-data/
-
 .vscode/
 
 .DS_Store

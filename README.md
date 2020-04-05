@@ -43,6 +43,12 @@ $ git checkout linux
     ```
     $ conda activate tf
     ```
+- If you face trouble installing packages, yoou may install using `setup.sh`
+
+    ```console
+    $ chmod +x setup.sh
+    $ ./setup.sh
+    ```
 
 ### Option 2: Using Virtual Environment
 
@@ -138,27 +144,16 @@ below:
 
 The chords dataset was collected from MONTEFIORE RESEARCH GROUP of University of Liège - Montefiore Institute (Montefiore.ulg.ac.be, 2019). The chords dataset consists of 10 types of chords with 200 audio files of each chord.
 
-Run download_data.sh to download the dataset using:
+Run download_data.sh to download the dataset:
 
 ```console
 $ chmod +x download_data.sh
 $ ./download_data.sh
 ```
 
-### 2. Install tensorflow-gpu for faster training (If you have GPU)
-
-**Prerequisites**
-
-- Nvidia GPU (GTX 650 or newer)
-- CUDA Toolkit v10.0
-- CuDNN 7.6.5
-
-Follow instructions on this
-[`site`](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-gpu) to install
-cuda and cudnn. However, no need to create a new conda environment as you already have created one.
-
-Then Install tensorflow-gpu. Make sure you are inside the conda environment `tf`
+### 2. Run `train.py`
 
 ```console
-$ conda install -c anaconda tensorflow-gpu==1.13.1
+$ python -m src.train
 ```
+
