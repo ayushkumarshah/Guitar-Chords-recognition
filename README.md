@@ -157,7 +157,21 @@ $ ./download_data.sh
 $ python -m src.train
 ```
 
->You can view the training logs in the file `logs/info.log`
+>You can view the logs in the file `logs/info.log`
+
+To view the real-time tensorboard logging, type the command:
+
+```console
+$ tensorboard --logdir logs/training
+```
+
+Then open your browser and goto [localhost:6006](http://localhost:6006) to
+visualize the training.
+
+You will see something like this:
+
+![Tensorboard](output/images/tensorboard.png)
+
 
 ## License
 
