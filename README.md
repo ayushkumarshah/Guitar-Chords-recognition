@@ -159,6 +159,19 @@ $ python -m src.train
 
 >You can view the training logs in the file `logs/info.log`
 
+To view the real-time tensorboard logging, type the command:
+
+```console
+$ tensorboard --logdir logs/training
+```
+
+Then open your browser and goto [localhost:6006](http://localhost:6006) to
+visualize the training.
+
+You will see something like this:
+
+![Tensorboard](output/images/tensorboard.png)
+
 ## License
 
 Guitar-Chords-recognition is licensed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) license.
