@@ -16,6 +16,9 @@ METADATA_DIR_AUGMENTED = os.path.join(METADATA_DIR, 'augmented')
 METADATA_DIR_AUGMENTED_RAW = os.path.join(METADATA_DIR_AUGMENTED, 'raw')
 METADATA_DIR_AUGMENTED_PROCESSED = os.path.join(METADATA_DIR_AUGMENTED, 'processed')
 
+LOG_DIR = os.path.join(ROOT_DIR, 'logs')
+LOG_DIR_TRAINING = os.path.join(LOG_DIR, 'training')
+
 MODEL_DIR = os.path.join(ROOT_DIR, 'models')
 MODEL_JSON = os.path.join(MODEL_DIR, 'model.json')
 MODEL_H5 = os.path.join(MODEL_DIR, 'model.h5')

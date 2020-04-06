@@ -1,6 +1,7 @@
 import random
 import keras
 import os, glob
+import logging
 import librosa, librosa.display
 
 import numpy as np
@@ -18,9 +19,13 @@ from src.data import generate, augment
 from src.processing import *
 from src.model import CNN
 from src.data.preprocessing import get_most_shape
+from setup_logging import setup_logging
+
+setup_logging()
+logger = logging.getLogger('src.train')
 
 def main():
-
+    logger.info("Start Training Pipeline")
     augmented = True
     if augmented:
         if not os.path.exists(os.path.join(METADATA_DIR_AUGMENTED_PROCESSED, 'data.pkl')):
@@ -34,7 +39,7 @@ def main():
             generate.run()
         dataset = pd.read_pickle(os.path.join(METADATA_DIR_PROCESSED, 'data.pkl'))
 
-    print("Number of samples: ", len(dataset))
+    logger.info(f"Number of samples: {len(dataset)}")
     most_shape = get_most_shape(dataset)
     train_data, test_data = train_test_split(dataset, split_ratio=0.8)
 
@@ -52,14 +57,14 @@ def main():
 
     # Instance of CNN model
     cnn = CNN(most_shape)
-    print(cnn)
+    logger.info(cnn)
 
     cnn.train(X_train, y_train, X_test, y_test)
     cnn.evaluate(X_train, y_train, X_test, y_test)
 
     predictions = cnn.model.predict_classes(X_test)
     conf_matrix=confusion_matrix(y_test_values, predictions, labels=range(10))
-    print(conf_matrix)
+    logger.info(conf_matrix)
     cnn.save_model()
 
 if __name__ == '__main__':
