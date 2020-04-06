@@ -1,0 +1,25 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+  simple:
+    format: "%(name)s - %(levelname)s - %(message)s"
+  main:
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+
+  file_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: main
+    filename: logs/info.log #Overridden by environment variable LOG_LOCATION if set
+    maxBytes: 10485760 # 10MB
+    backupCount: 20
+    encoding: utf8
+root:
+  level: INFO
+  handlers: [console, file_handler]
