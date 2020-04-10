@@ -73,19 +73,28 @@ It uses the trained model `models/model.json` to predict a recorded guitar chord
 - First, check the info of the audio recording device of your system by running
 
     ```console
-    $ python -m src.rec_device_info
+    $ python -m src.sound
     ```
 
     You will receive output something like this:
 
     ```console
-    [('index', 0), ('name', 'MacBook Pro Microphone'), ('maxInputChannels', 1), ('defaultSampleRate', 44100.0)]
+   pygame 1.9.6
+    Hello from the pygame community. https://www.pygame.org/contribute.html
+    src.sound - INFO - List of System's Audio Devices configurations:
+    src.sound - INFO - Number of audio devices: 2
+    src.sound - INFO - [('index', 0), ('name', 'MacBook Pro Microphone'), ('maxInputChannels', 1), ('defaultSampleRate', 44100.0)]
+    src.sound - INFO - [('index', 1), ('name', 'MacBook Pro Speakers'), ('maxInputChannels', 0), ('defaultSampleRate', 44100.0)]
 
-    [('index', 1), ('name', 'MacBook Pro Speakers'), ('maxInputChannels', 0), ('defaultSampleRate', 44100.0)]
+    src.sound - INFO - Audio device configurations currently used
+    src.sound - INFO - Default input device index = 0
+    src.sound - INFO - Max input channels = 1
+    src.sound - INFO - Default samplerate = 44100
     ```
 
-- Note down the `index`, `maxInputChannels` and  `defaultSampleRate` of your recording device or microphone (eg. MacBook
-  Pro Microphone). In my system. it is
+- Check if the `index`, `maxInputChannels` and  `defaultSampleRate` of your recording device or microphone (eg. MacBook
+  Pro Microphone) matches with the device configurations currently used (both displayed in the output). The
+  configurations for my recording device is:
 
     ```console
     index = 0
@@ -93,17 +102,13 @@ It uses the trained model `models/model.json` to predict a recorded guitar chord
     defaultSampleRate = 44100.0
     ```
 
-- Open `src/classify.py` and modify the values accordingly in line numbers 77, 78 and 91
+- Open `settings.py` and modify the values accordingly in line numbers 38 to 40
 
     ```python
-    CHANNELS = 1
-    RATE = 44100
-    ...
-    stream = audio.open(
-                    ...
-                    frames_per_buffer=CHUNK,
-                    input_device_index=0)
-                    )
+    # Audio configurations
+    INPUT_DEVICE = 0
+    MAX_INPUT_CHANNELS = 1  # Max input channels
+    DEFAULT_SAMPLE_RATE = 44100   # Default sample rate of microphone or recording device
     ```
 
 ## Running the Chords Classifier App (classifier.py)
