@@ -1,6 +1,6 @@
 conda create -n tf python=3.6
-conda activate tf
-conda install pandas keras=2.2.4
+source activate tf
+conda install pandas
 conda install -c conda-forge librosa=0.6.1
 pip install pygame==1.9.6 pillow==7.1.1
 conda install -c anaconda tk==8.6.8

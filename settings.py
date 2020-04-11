@@ -3,6 +3,8 @@ import os
 # The Root Directory of the project
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+LOG_CONFIG = os.path.join(ROOT_DIR, 'logging.yml')
+
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 DATA_DIR_AUDIO = os.path.join(DATA_DIR, 'audio')
 DATA_DIR_GUITAR = os.path.join(DATA_DIR_AUDIO, 'Guitar_Only/')

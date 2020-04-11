@@ -4,6 +4,7 @@ import librosa
 import datetime
 import tensorflow as tf
 import keras
+import numpy as np
 
 from keras.layers import Activation, Dense, Dropout, Conv2D, \
                          Flatten, MaxPooling2D
@@ -19,7 +20,6 @@ from setup_logging import setup_logging
 setup_logging()
 logger = logging.getLogger('src.model')
 class CNN(object):
-
     def __init__(self, most_shape):
         logger.info("Initializing CNN")
         self.model = Sequential()
@@ -49,7 +49,7 @@ class CNN(object):
 
 
     def __str__(self):
-        return str(self.model.summary)
+        return str(self.model.summary())
 
     def train(self, X_train, y_train, X_test, y_test):
         logger.info("Start training model")
@@ -138,6 +138,11 @@ class CNN(object):
             ps = np.array(ps.reshape(shape))
             predictions = self.model.predict_classes(ps)
             class_id = predictions[0]
-            logger.info("The recorded chor is "+str(CLASSES[class_id]))
+            chord = str(CLASSES[class_id])
+            logger.info("The recorded chord is " + chord)
         except:
             logger.info("File note found")
+            chord = "N/A"
+        return chord
+
+# cnn = CNN((128, 87))
