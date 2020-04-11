@@ -14,55 +14,8 @@ from pygame import mixer
 from PIL import Image, ImageTk
 
 from settings import *
-
-def precision(y_true, y_pred):
-    '''Calculates the precision, a metric for multi-label classification of
-    how many selected items are relevant.
-    '''
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    precision = true_positives / (predicted_positives + K.epsilon())
-    return precision
-
-def recall(y_true, y_pred):
-    '''Calculates the recall, a metric for multi-label classification of
-    how many relevant items are selected.
-    '''
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
-    recall = true_positives / (possible_positives + K.epsilon())
-    return recall
-
-def fbeta_score(y_true, y_pred, beta=1):
-    '''Calculates the F score, the weighted harmonic mean of precision and recall.
-    This is useful for multi-label classification, where input samples can be
-    classified as sets of labels. By only using accuracy (precision) a model
-    would achieve a perfect score by simply assigning every class to every
-    input. In order to avoid this, a metric should penalize incorrect class
-    assignments as well (recall). The F-beta score (ranged from 0.0 to 1.0)
-    computes this, as a weighted mean of the proportion of correct class
-    assignments vs. the proportion of incorrect class assignments.
-    With beta = 1, this is equivalent to a F-measure. With beta < 1, assigning
-    correct classes becomes more important, and with beta > 1 the metric is
-    instead weighted towards penalizing incorrect class assignments.
-    '''
-    if beta < 0:
-        raise ValueError('The lowest choosable beta is zero (only precision).')
-
-    # If there are no true positives, fix the F score at 0 like sklearn.
-    if K.sum(K.round(K.clip(y_true, 0, 1))) == 0:
-        return 0
-
-    p = precision(y_true, y_pred)
-    r = recall(y_true, y_pred)
-    bb = beta ** 2
-    fbeta_score = (1 + bb) * (p * r) / (bb * p + r + K.epsilon())
-    return fbeta_score
-
-def fmeasure(y_true, y_pred):
-    '''Calculates the f-measure, the harmonic mean of precision and recall.
-    '''
-    return fbeta_score(y_true, y_pred, beta=1)
+from src.sound import sound
+from src.metrics import *
 
 def restart_program():
     """Restarts the current program.
@@ -71,42 +24,6 @@ def restart_program():
     python = sys.executable
     # os.execl(python, python, * sys.argv)
     os.execl(python, python, "-m", "src.classify", * sys.argv)
-
-def record():
-    FORMAT = pyaudio.paInt16
-    CHANNELS = 1
-    RATE = 44100
-    CHUNK = 1024
-    RECORD_SECONDS = 3
-
-    audio = pyaudio.PyAudio()
-
-    # start Recording
-    stream = audio.open(
-                    format=FORMAT,
-                    channels=CHANNELS,
-                    rate=RATE,
-                    input=True,
-                    frames_per_buffer=CHUNK,
-                    input_device_index=0)
-    print ("recording...")
-    frames = []
-
-    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-        data = stream.read(CHUNK)
-        frames.append(data)
-    print ("finished recording")
-    # stop Recording
-    stream.stop_stream()
-    stream.close()
-    audio.terminate()
-
-    waveFile = wave.open(WAVE_OUTPUT_FILE, 'wb')
-    waveFile.setnchannels(CHANNELS)
-    waveFile.setsampwidth(audio.get_sample_size(FORMAT))
-    waveFile.setframerate(RATE)
-    waveFile.writeframes(b''.join(frames))
-    waveFile.close()
 
 def classify():
     # Example of a Siren spectrogram
@@ -144,11 +61,6 @@ def display(ps, y, sr):
     label.image = photo # keep a reference!
     label.pack()
 
-def play():
-    mixer.Sound(WAVE_OUTPUT_FILE).play()
-
-
-mixer.init(44100)
 tk=Tk()
 tk.title('Guitar Chord Classifier')
 canvas_width=500
@@ -172,10 +84,10 @@ loaded_model.compile(
 ox,oy=0,0
 
 #Buttons
-record=Button(canvas, text='Record',font="Times 15 bold", command=record)
+record=Button(canvas, text='Record',font="Times 15 bold", command=sound.record)
 canvas.create_window(150, 50, window=record, height=25, width=100)
 
-play=Button(canvas, text='Play',font="Times 15 bold", command=play)
+play=Button(canvas, text='Play',font="Times 15 bold", command=sound.play)
 canvas.create_window(250, 50, window=play, height=25, width=50)
 
 classify=Button(canvas, text='Classify',font="Times 15 bold", command=classify)
