@@ -46,6 +46,7 @@ class Sound(object):
 
     def record(self):
         # start Recording
+        self.audio = pyaudio.PyAudio()
         stream = self.audio.open(
                         format=self.format,
                         channels=self.channels,

@@ -41,7 +41,7 @@ def main():
 
     logger.info(f"Number of samples: {len(dataset)}")
     most_shape = get_most_shape(dataset)
-    train_data, test_data = train_test_split(dataset, split_ratio=0.8)
+    train_data, test_data = train_test_split(dataset, augmented=augmented, split_ratio=0.6)
 
     X_train, y_train = features_target_split(train_data)
     X_test, y_test = features_target_split(test_data)

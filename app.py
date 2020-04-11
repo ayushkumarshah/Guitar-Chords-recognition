@@ -13,6 +13,11 @@ from setup_logging import setup_logging
 setup_logging()
 logger = logging.getLogger('app')
 
+def init_model():
+    cnn = CNN((128, 87))
+    cnn.load_model()
+    return cnn
+
 def get_spectrogram(type='mel'):
     logger.info("Extracting spectrogram")
     y, sr = librosa.load(WAVE_OUTPUT_FILE, duration=DURATION)
@@ -34,7 +39,7 @@ def display(spectrogram, format):
     st.pyplot(clear_figure=False)
 
 def main():
-    display_pressed = 0
+    cnn = init_model()
     title = "Guitar Chord Recognition"
     st.title(title)
     image = Image.open(os.path.join(IMAGE_DIR, 'app_guitar.jpg'))
@@ -56,8 +61,7 @@ def main():
 
     if st.button('Classify'):
         with st.spinner("Classifying the chord"):
-            cnn = CNN((128, 87))
-            chord = cnn.predict(WAVE_OUTPUT_FILE)
+            chord = cnn.predict(WAVE_OUTPUT_FILE, False)
         st.success("Classification completed")
         st.write("### The recorded chord is **", chord + "**")
         if chord == 'N/A':

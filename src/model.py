@@ -127,22 +127,26 @@ class CNN(object):
         except:
             logger.info("Model not found")
 
-    def predict(self, filepath):
+    def predict(self, filepath, loadmodel=True):
         logger.info('Prediction')
-        self.load_model()
-        try:
-            y, sr = librosa.load(filepath, duration=2)
-            ps = librosa.feature.melspectrogram(y=y, sr=sr,)
-            px = ps
-            shape = (1,) + self.input_shape
-            ps = np.array(ps.reshape(shape))
-            predictions = self.model.predict_classes(ps)
-            class_id = predictions[0]
-            chord = str(CLASSES[class_id])
-            logger.info("The recorded chord is " + chord)
-        except:
-            logger.info("File note found")
-            chord = "N/A"
+        if loadmodel:
+            # self.load_model()
+            pass
+        else:
+            # try:
+                y, sr = librosa.load(filepath, duration=2)
+                ps = librosa.feature.melspectrogram(y=y, sr=sr,)
+                px = ps
+                px
+                shape = (1,) + self.input_shape
+                ps = np.array(ps.reshape(shape))
+                predictions = self.model.predict_classes(ps)
+                class_id = predictions[0]
+                chord = str(CLASSES[class_id])
+                logger.info("The recorded chord is " + chord)
+            # except:
+                # logger.info("File note found")
+                # chord = "N/A"
         return chord
 
 # cnn = CNN((128, 87))
