@@ -22,21 +22,14 @@ from src.data.preprocessing import get_most_shape
 from setup_logging import setup_logging
 
 setup_logging()
-logger = logging.getLogger('src.train')
+logger = logging.getLogger('src.test')
 
 def main():
-    logger.info("Start Training Pipeline")
+    logger.info("Start Testing Pipeline")
     augmented = True
     if augmented:
-        if not os.path.exists(os.path.join(METADATA_DIR_AUGMENTED_PROCESSED, 'data.pkl')):
-            augment.main()
-             # Read Data
         dataset = pd.read_pickle(os.path.join(METADATA_DIR_AUGMENTED_PROCESSED, 'data.pkl'))
-
     else:
-        # Generate MetaData if not generated yet
-        if not os.path.exists(os.path.join(METADATA_DIR_PROCESSED,'data.pkl')):
-            generate.run()
         dataset = pd.read_pickle(os.path.join(METADATA_DIR_PROCESSED, 'data.pkl'))
 
     logger.info(f"Number of samples: {len(dataset)}")
@@ -59,13 +52,12 @@ def main():
     cnn = CNN(most_shape)
     logger.info(str(cnn))
 
-    cnn.train(X_train, y_train, X_test, y_test)
+    cnn.load_model()
     cnn.evaluate(X_train, y_train, X_test, y_test)
 
     predictions = cnn.model.predict_classes(X_test)
     conf_matrix=confusion_matrix(y_test_values, predictions, labels=range(10))
     logger.info('Confusion Matrix for classes {}:\n{}'.format(CLASSES, conf_matrix))
-    cnn.save_model()
 
 if __name__ == '__main__':
     main()
