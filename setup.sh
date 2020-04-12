@@ -1,10 +1,13 @@
-conda create -n tf python=3.6
+conda create -y -n tf python=3.6
+eval "$(conda shell.zsh hook)"
 conda activate tf
-conda install pandas keras=2.2.4
-conda install -c conda-forge librosa=0.6.1
+# source activate tf
+conda install -y pandas==1.0.3
+conda install -y -c conda-forge librosa=0.6.1
 pip install pygame==1.9.6 pillow==7.1.1
-conda install -c anaconda tk==8.6.8
-conda install -c anaconda pyaudio==0.2.11
+conda install -y -c anaconda tk==8.6.8
+conda install -y -c anaconda pyaudio==0.2.11
+pip install tensorflow==1.8.0 keras==2.2.4
 pip install imbalanced-learn==0.6.2
 pip install streamlit==0.57.3
-conda install -c conda-forge jupyter notebook
+conda install -y -c conda-forge jupyter notebook
