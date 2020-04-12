@@ -3,6 +3,8 @@ import os
 # The Root Directory of the project
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+LOG_CONFIG = os.path.join(ROOT_DIR, 'logging.yml')
+
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 DATA_DIR_AUDIO = os.path.join(DATA_DIR, 'audio')
 DATA_DIR_GUITAR = os.path.join(DATA_DIR_AUDIO, 'Guitar_Only/')
@@ -34,8 +36,9 @@ SPECTROGRAM_FILE = os.path.join(RECORDING_DIR, "spectrogram.png")
 CLASSES = ['a', 'am', 'bm', 'c', 'd', 'dm', 'e', 'em', 'f', 'g']
 CLASSES_MAP = {'a':0, 'am':1, 'bm':2, 'c':3, 'd':4, 'dm':5, 'e':6, 'em':7, 'f':8, 'g':9}
 
-# # Model Config base
-# MODEL_CONFIG_DIR = os.path.join(ROOT_DIR, 'training_config')
-# DEFAULT_MODEL_CONFIG = os.path.join(MODEL_CONFIG_DIR, 'nfm.json')
-# SAMPLING_CONFIG = os.path.join(MODEL_CONFIG_DIR, 'sampling.json')
-
+# Audio configurations
+INPUT_DEVICE = 0
+MAX_INPUT_CHANNELS = 1  # Max input channels
+DEFAULT_SAMPLE_RATE = 44100   # Default sample rate of microphone or recording device
+DURATION = 3   # 3 seconds
+CHUNK_SIZE = 1024

@@ -4,12 +4,14 @@ import librosa
 import datetime
 import tensorflow as tf
 import keras
+import numpy as np
 
 from keras.layers import Activation, Dense, Dropout, Conv2D, \
                          Flatten, MaxPooling2D
 from keras.models import Sequential, model_from_json
 from keras import backend as K
 from keras.models import model_from_json
+from keras.callbacks import Callback
 
 from settings import CLASSES_MAP, MODEL_JSON, MODEL_H5, CLASSES, \
                                     MODEL_DIR, LOG_DIR_TRAINING
@@ -18,8 +20,21 @@ from setup_logging import setup_logging
 
 setup_logging()
 logger = logging.getLogger('src.model')
-class CNN(object):
 
+class LoggingCallback(Callback):
+    """Callback that logs message at end of epoch.
+    """
+    def __init__(self, print_fcn=print):
+        Callback.__init__(self)
+        self.print_fcn = print_fcn
+
+
+    def on_epoch_end(self, epoch, logs={}):
+
+        msg = "{Epoch: %i} %s" % (epoch, ", ".join("%s: %f" % (k, v) for k, v in logs.items()))
+        self.print_fcn(msg)
+
+class CNN(object):
     def __init__(self, most_shape):
         logger.info("Initializing CNN")
         self.model = Sequential()
@@ -49,7 +64,7 @@ class CNN(object):
 
 
     def __str__(self):
-        return str(self.model.summary)
+        return str(self.model.summary())
 
     def train(self, X_train, y_train, X_test, y_test):
         logger.info("Start training model")
@@ -68,10 +83,10 @@ class CNN(object):
         self.model.fit(
             x=X_train,
             y=y_train,
-            epochs=70,
+            epochs=67,
             batch_size=20,
             validation_data= (X_test, y_test),
-            callbacks=[tensorboard_callback])
+            callbacks=[tensorboard_callback, LoggingCallback(logger.info)])
 
         logger.info("Training completed")
 
@@ -127,17 +142,26 @@ class CNN(object):
         except:
             logger.info("Model not found")
 
-    def predict(self, filepath):
+    def predict(self, filepath, loadmodel=True):
         logger.info('Prediction')
-        self.load_model()
-        try:
-            y, sr = librosa.load(filepath, duration=2)
-            ps = librosa.feature.melspectrogram(y=y, sr=sr,)
-            px = ps
-            shape = (1,) + self.input_shape
-            ps = np.array(ps.reshape(shape))
-            predictions = self.model.predict_classes(ps)
-            class_id = predictions[0]
-            logger.info("The recorded chor is "+str(CLASSES[class_id]))
-        except:
-            logger.info("File note found")
+        if loadmodel:
+            # self.load_model()
+            pass
+        else:
+            # try:
+                y, sr = librosa.load(filepath, duration=2)
+                ps = librosa.feature.melspectrogram(y=y, sr=sr,)
+                px = ps
+                px
+                shape = (1,) + self.input_shape
+                ps = np.array(ps.reshape(shape))
+                predictions = self.model.predict_classes(ps)
+                class_id = predictions[0]
+                chord = str(CLASSES[class_id])
+                logger.info("The recorded chord is " + chord)
+            # except:
+                # logger.info("File note found")
+                # chord = "N/A"
+        return chord
+
+# cnn = CNN((128, 87))

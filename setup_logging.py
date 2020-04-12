@@ -3,9 +3,10 @@ import logging.config
 import yaml
 import time
 from logging import Formatter
+from settings import LOG_CONFIG
 
 def setup_logging():
-    with open('logging.yml', 'r') as f:
+    with open(LOG_CONFIG, 'r') as f:
         config = yaml.safe_load(f.read())
         logging.config.dictConfig(config)
 
