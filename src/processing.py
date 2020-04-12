@@ -10,7 +10,7 @@ logger = logging.getLogger('src.processing')
 def train_test_split(dataset, augmented=True, split_ratio=0.65):
     logger.info(f"Start train test split with split ratio: {split_ratio}")
     np.random.seed(42)
-    sample = np.random.choice(dataset.index, size=int(len(dataset) * 0.8), replace=False)
+    sample = np.random.choice(dataset.index, size=int(len(dataset) * split_ratio), replace=False)
     if augmented:
         train_data = dataset.iloc[sample]
         test_data = dataset.drop(sample)

@@ -39,7 +39,6 @@ def display(spectrogram, format):
     st.pyplot(clear_figure=False)
 
 def main():
-    cnn = init_model()
     title = "Guitar Chord Recognition"
     st.title(title)
     image = Image.open(os.path.join(IMAGE_DIR, 'app_guitar.jpg'))
@@ -60,6 +59,7 @@ def main():
             st.write("Please record sound first")
 
     if st.button('Classify'):
+        cnn = init_model()
         with st.spinner("Classifying the chord"):
             chord = cnn.predict(WAVE_OUTPUT_FILE, False)
         st.success("Classification completed")

@@ -11,6 +11,7 @@ from keras.layers import Activation, Dense, Dropout, Conv2D, \
 from keras.models import Sequential, model_from_json
 from keras import backend as K
 from keras.models import model_from_json
+from keras.callbacks import Callback
 
 from settings import CLASSES_MAP, MODEL_JSON, MODEL_H5, CLASSES, \
                                     MODEL_DIR, LOG_DIR_TRAINING
@@ -19,6 +20,20 @@ from setup_logging import setup_logging
 
 setup_logging()
 logger = logging.getLogger('src.model')
+
+class LoggingCallback(Callback):
+    """Callback that logs message at end of epoch.
+    """
+    def __init__(self, print_fcn=print):
+        Callback.__init__(self)
+        self.print_fcn = print_fcn
+
+
+    def on_epoch_end(self, epoch, logs={}):
+
+        msg = "{Epoch: %i} %s" % (epoch, ", ".join("%s: %f" % (k, v) for k, v in logs.items()))
+        self.print_fcn(msg)
+
 class CNN(object):
     def __init__(self, most_shape):
         logger.info("Initializing CNN")
@@ -68,10 +83,10 @@ class CNN(object):
         self.model.fit(
             x=X_train,
             y=y_train,
-            epochs=70,
+            epochs=67,
             batch_size=20,
             validation_data= (X_test, y_test),
-            callbacks=[tensorboard_callback])
+            callbacks=[tensorboard_callback, LoggingCallback(logger.info)])
 
         logger.info("Training completed")
 
