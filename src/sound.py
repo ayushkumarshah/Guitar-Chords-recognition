@@ -3,7 +3,7 @@ import pyaudio, wave, pylab
 import numpy as np
 import librosa, librosa.display
 import matplotlib.pyplot as plt
-from pygame import mixer
+# from pygame import mixer
 from scipy.io.wavfile import write
 from settings import DURATION, DEFAULT_SAMPLE_RATE, MAX_INPUT_CHANNELS, \
                                     WAVE_OUTPUT_FILE, INPUT_DEVICE, CHUNK_SIZE
@@ -75,12 +75,12 @@ class Sound(object):
         waveFile.close()
         logger.info(f"Recording saved to {self.path}")
 
-    def play(self):
-        logger.info(f"Playing the recorded sound {self.path}")
-        mixer.init(self.sample_rate)
-        recording = mixer.Sound(self.path).play()
-        while recording.get_busy():
-            continue
+    # def play(self):
+    #     logger.info(f"Playing the recorded sound {self.path}")
+    #     mixer.init(self.sample_rate)
+    #     recording = mixer.Sound(self.path).play()
+    #     while recording.get_busy():
+    #         continue
 
 sound = Sound()
 

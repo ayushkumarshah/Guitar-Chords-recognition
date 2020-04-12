@@ -40,19 +40,29 @@ $ git checkout linux
     Just remove those packages from the file `environment.yml` and rerun the above command. Then activate the
     environment by
 
-    ```
+    ```console
     $ conda activate tf
     ```
-- If you face trouble installing packages, yoou may install using `setup.sh`
+
+### Option 2: Using setup.sh
+
+- If you face trouble installing packages, you may install using `setup.sh`. If you use bash shell instead of zsh, edit
+  line 2 of `setup.sh` by replacing zsh with bash. i.e. 
+
+  ```shell
+  eval "$(conda shell.zsh hook)"
+  ```
+
+  Then run the following commands
 
     ```console
     $ chmod +x setup.sh
     $ ./setup.sh
     ```
 
-### Option 2: Using Virtual Environment
+### Option 3: Using Virtual Environment
 
-- Install and virtualenv using pip and create a virtual environment '.venv'
+- Install virtualenv using pip and create a virtual environment '.venv'
 
     ```console
     $ pip install virtualenv
@@ -111,34 +121,31 @@ It uses the trained model `models/model.json` to predict a recorded guitar chord
     DEFAULT_SAMPLE_RATE = 44100   # Default sample rate of microphone or recording device
     ```
 
-## Running the Chords Classifier App (classifier.py)
+## Running the Guitar Chords Recognition Webapp
 
-- Execute the python file 'classify.py'
+- Execute the python file `app.py` using streamlit
 
     ```console
-    $ python -m src.classify
+    $ streamlit run app.py
     ```
 
-- A window is launched as shown below: 
+- The webapp is launched in your browser and opened automatically as shown below. You may also open it by visiting [http://localhost:8501](http://localhost:8501)
 
-    ![Home Interface](output/images/Interface-home.png)
-
-- Click record and play a chord. It records for 3 seconds and saves the output wav file to `recording/recorded.wav`. 
-
-- Click play to listen to the recorded sound. 
-
-- Click classify to view the predicted chord along with the melspectrogram of the recorded chord.
-
-- Click clear to record another chord.
-
-See the demo below:
     <div align = 'center'>
-        <a href = 'https://www.youtube.com/watch?v=DOCVIk9Ocys'>
-            <img src = 'output/images/app-demo.gif' alt = 'App demo. Click to go to YouTube!' >
+        <a href = 'https://www.youtube.com/watch?v=KJ4sJupEfpg'>
+            <img src = 'output/images/webapp.gif' alt = 'App demo. Click to go to YouTube!' >
         </a>
     </div>
 
-> Click the above video to to go to YouTube and hear the sound as well.
+    > Click the above video to to go to YouTube and hear the sound as well.
+
+- Click `Record` and play a chord in your guitar. It records for 3 seconds and saves the output wav file to `recording/recorded.wav`. 
+
+- Click `Play` to listen to the recorded sound. 
+
+- Click `Classify` to view the predicted chord along with the melspectrogram of the recorded chord.
+
+- Click `Display Spectrogram` to display the spectrogram of the recorded chord.
 
 ## Training the model (Optional)
 
@@ -176,6 +183,17 @@ visualize the training.
 You will see something like this:
 
 ![Tensorboard](output/images/tensorboard.png)
+
+### 3. Run `test.py`
+
+You can test the performance of your model after the training by running:
+
+```conosle
+$ python -m src.test
+```
+
+## Report Issues 
+If you have any issues with the app, please report it here: [Issues](https://github.com/ayushkumarshah/Guitar-Chords-recognition/issues)
 
 ## License
 
