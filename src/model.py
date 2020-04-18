@@ -101,11 +101,13 @@ class CNN(object):
             y=y_train)
 
         logger.info(f'Train loss: {self.score_train[0]}')
+        logger.info(f'Train accuracy: {self.score_train[1]}')
         logger.info(f'Train precision: {self.score_train[2]}')
         logger.info(f'Train recall: {self.score_train[3]}')
         logger.info(f'Train f1-score: {self.score_train[4]}')
 
         logger.info(f'Test loss: {self.score_test[0]}')
+        logger.info(f'Test accuracy: {self.score_test[1]}')
         logger.info(f'Test precision: {self.score_test[2]}')
         logger.info(f'Test recall: {self.score_test[3]}')
         logger.info(f'Test f1-score: {self.score_test[4]}')
