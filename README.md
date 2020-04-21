@@ -18,6 +18,8 @@ $ git checkout linux
 
 ### 2. Installation
 
+> You can install the required packages using any **`one of the 3 options`** below. However, **`Option 1`** is recommended.
+
 ### Option 1: Using Conda - Recommended
 
 - Download and install [miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or
