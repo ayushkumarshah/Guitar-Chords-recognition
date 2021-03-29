@@ -72,7 +72,7 @@ protobuf==3.11.3
 ptyprocess==0.6.0
 PyAudio==0.2.11
 pydeck==0.3.0
-Pygments==2.6.1
+Pygments==2.7.4
 pyparsing==2.4.7
 pyrsistent==0.16.0
 python-dateutil==2.8.1
