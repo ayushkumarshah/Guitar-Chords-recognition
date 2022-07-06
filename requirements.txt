@@ -24,7 +24,7 @@ future==0.18.2
 gast==0.3.3
 grpcio==1.28.1
 h5py==2.10.0
-html5lib==0.9999999
+html5lib==0.999999999
 idna==2.9
 imbalanced-learn==0.6.2
 importlib-metadata==1.6.0
